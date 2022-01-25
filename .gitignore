@@ -1,5 +1,6 @@
 desktop.ini
 .vscode
 keyboard-master
-.venv/*
-**/.venv
+.venv
+C:\Users\mmignin\Documents\PyLMS\.venv
+.vscode/launch.json
