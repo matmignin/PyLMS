@@ -1,3 +1,5 @@
 desktop.ini
 .vscode
-.venv
+keyboard-master
+.venv/*
+**/.venv
