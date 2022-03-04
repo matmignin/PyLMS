@@ -1,68 +1,12 @@
+import json
 
-import re, pyperclip, os, json
-
-# def get_codes():
-with open('codes.json') as f:
-	data = json.load(f)['product']
-print(data)
-
-# Clipboard = '''
-# 2/28/22
-# F
-# Skinny Coffee 360g Bag
-# J984
-# 111-0330
-# Appitivi llc
-# 0334A2B
-# 2/28/22
-# F
-# Skinny Coffee 360g Bag
-# J984
-# 111-0331
-# Appitivi llc
-# 0334A2C
-# 2/28/22
-# F
-# Blue Raspberry 4g Stick
-# K656
-# 106-1272
-# Branded Acquico
-# 0225L1
-# 2/28/22
-# F
-# Electrolyte Lemonade Power 378g
-# K607
-# 201-0027
-# Branded Acquico
-# 0106A2
-# 2/28/22
-# F
-# '''
-# find_product = re.compile(r'((?<=\w{3})?(?P<product>[abdefghijkl]\d{3}))(?=\w{4})?-',re.IGNORECASE|re.DOTALL)
-# # found_product = find_product.search(Clipboard)
-
-# find_batch = re.compile(r'(?<!Ct#)\d{3}-\d{4}\b',re.IGNORECASE|re.DOTALL)
-# # found_batch = find_batch.search(Clipboard)
-
-# find_name = re.compile(r'((?:2016\.\n*(?P<name>[\w \S]*))(?!Dietary Supplement))',re.IGNORECASE)
-
-# find_lot = re.compile(r'(?P<Lot>\b\d{4}\w\d\w?|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d)',re.IGNORECASE|re.DOTALL)
-# find_coated = re.compile(r'(\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d\s|coated: |ct#?|ct\s?|coated\s?)(?P<Coated>\d{3}-\d{4})',re.IGNORECASE|re.DOTALL)
-# # Clipboard = pyperclip.paste()
-# # found_name = find_name.search(Clipboard)
-# # print(found_name.group(1))
-
-# # print(found_product.group('product'))
-# try:
-# 	Batch = re.findall(find_batch,Clipboard)
-# 	print(Batch[3])
-# 	# print('----')
-# 	# print(os.environ.get('VAR1'))
-# 	os.environ['VAR_Batch1'] = Batch[1]
-# 	print(os.environ['VAR_Batch1'])
-# except:
-# 	print('')
-
+try:
+	with open('/Volumes/SHARED/PyLMS/codes.json') as f:
+		# data = json.load(f)['code'][0]['product']
+		data = json.load(f)['code'][1]['product']
+	print(data)
+except:
+	print('')
 
 
 
