@@ -1,3 +1,4 @@
 {
-	"autoHide.autoHideSideBar": false
+	"autoHide.autoHideSideBar": false,
+	"python.formatting.provider": "black"
 }

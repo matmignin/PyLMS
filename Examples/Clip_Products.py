@@ -2,10 +2,10 @@
 import re, pyperclip, os, json
 
 # def get_codes():
-data = json.load('codes.json')
+# data = json.load('codes.json')
 
 
-Clipboard = '''
+clipboard = '''
 2/28/22
 F
 Skinny Coffee 360g Bag
@@ -16,8 +16,8 @@ Appitivi llc
 2/28/22
 F
 Skinny Coffee 360g Bag
-J984
-111-0331
+J555
+555-0331
 Appitivi llc
 0334A2C
 2/28/22
@@ -37,35 +37,42 @@ Branded Acquico
 2/28/22
 F
 '''
-find_product = re.compile(r'((?<=\w{3})?(?P<product>[abdefghijkl]\d{3}))(?=\w{4})?-',re.IGNORECASE|re.DOTALL)
-# found_product = find_product.search(Clipboard)
+pattern_product = re.compile(r'(?<=\w{3})?(?P<product>[abdefghijkl]\d{3})(?=\w{4})?',re.IGNORECASE|re.DOTALL)
+pattern_batch = re.compile(r'[^(ct\#?)](?P<batch>\d{3}-\d{4}\b)',re.IGNORECASE|re.DOTALL)
+pattern_lot = re.compile(r'(?P<lot>\b\d{4}\w\d\w?|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d)',re.IGNORECASE|re.DOTALL)
+pattern_coated = re.compile(r'(?:\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d\s|coated:?\s?|ct\#?\s?)(?P<coated>\d{3}-\d{4})',re.IGNORECASE|re.DOTALL)
 
-find_batch = re.compile(r'(?<!Ct#)\d{3}-\d{4}\b',re.IGNORECASE|re.DOTALL)
-# found_batch = find_batch.search(Clipboard)
+####for clipping line by line
+# for line in clipboard.splitlines():
+# 	match_product = pattern_product.search(line)
+# 	if match_product:
+# 		print('product: ', match_product[0].upper())
+# 	match_batch = pattern_batch.search(line)
+# 	if match_batch:
+# 		print('batch: ', match_batch[0])
+# 	match_lot = pattern_lot.search(line)
+# 	if match_lot:
+# 		print('lot: ', match_lot[0].upper())
+# 	match_coated = pattern_coated.search(line)
+# 	if match_coated:
+# 		print('coated: ', match_coated[0])
+# 	print()
 
-find_name = re.compile(r'((?:2016\.\n*(?P<name>[\w \S]*))(?!Dietary Supplement))',re.IGNORECASE)
+match_product = pattern_product.search(clipboard)
+if match_product:
+	product = match_product.group('product').upper()
+match_batch = pattern_batch.search(clipboard)
+if match_batch:
+	batch = match_batch.group('batch')
+match_lot = pattern_lot.search(clipboard)
+if match_lot:
+	lot = match_lot.group('lot').upper()
+match_coated = pattern_coated.search(clipboard)
+if match_coated:
+	coated = match_coated.group('coated')
 
-find_lot = re.compile(r'(?P<Lot>\b\d{4}\w\d\w?|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d)',re.IGNORECASE|re.DOTALL)
-find_coated = re.compile(r'(\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d\s|coated: |ct#?|ct\s?|coated\s?)(?P<Coated>\d{3}-\d{4})',re.IGNORECASE|re.DOTALL)
-# Clipboard = pyperclip.paste()
-# found_name = find_name.search(Clipboard)
-# print(found_name.group(1))
+print(product, batch, lot, coated)
 
-# print(found_product.group('product'))
-try:
-	Batch = re.findall(find_batch,Clipboard)
-	print(Batch[3])
-	# print('----')
-	# print(os.environ.get('VAR1'))
-	os.environ['VAR_Batch1'] = Batch[1]
-	print(os.environ['VAR_Batch1'])
-except:
-	print('')
-# print(found_product[1])
-# print(re.findall(find_product,Clipboard))
-# print(re.findall(find_batch,Clipboard)[1])
-# print(re.finditer(found_batch[2],Clipboard))
-# print(re.findall(found_name.group('name'),Clipboard))
 
 
 
