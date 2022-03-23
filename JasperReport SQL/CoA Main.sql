@@ -20,8 +20,8 @@ SELECT
     coa_primary.generic06 AS coated_lot,
     dv.description AS ship_to_parms,
     coa_results.customer_lot,
-    -- Open request count (
-SELECT
+    -- Open request count
+    (SELECT
     COUNT(1)
 FROM
     testrequest trqc
@@ -53,8 +53,8 @@ coa_results.expiration_date,
 coa_results.po_number,
 coa_results.carton_lot,
 coa_results.fill_weight,
--- CoA something ?? (
-SELECT
+-- CoA something ??
+(SELECT
     COUNT(1)
 FROM
     testresult tr
@@ -73,8 +73,8 @@ CASE
     THEN 'Y'
     ELSE 'N'
 END AS IS_REPORT_REV1,
--- Report date format (
-SELECT
+-- Report date format
+(SELECT
     dv.description
 FROM
     domainvalue dv
