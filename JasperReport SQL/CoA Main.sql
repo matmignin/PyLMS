@@ -50,6 +50,7 @@ coa_results.testguid AS coa_testguid,
 coa_sign.max_circulationid AS coa_version,
 coa_results.manufacture_date,
 coa_results.expiration_date,
+coa_results.po_number,
 coa_results.carton_lot,
 coa_results.fill_weight,
 -- CoA something ?? (
@@ -189,6 +190,7 @@ FROM
             tr3.textresult AS carton_lot,
             tr4.numericalresulttext | | ' ' | | DECODE(tr4.numericalresulttext, NULL, NULL, tr4.unit) AS fill_weight,
             tr6.textresult AS customer_lot,
+            tr7.textresult AS po_number,
             trq.approvedby,
             trq.approvaldate
         FROM
@@ -232,6 +234,11 @@ FROM
             tr6.resultid = 'Customer Lot' AND
             tr6.resultvaluation = 'OK' AND
             tr6.deletion = 'N'
+            LEFT JOIN testresult tr7
+            ON tr7.testguid = t.testguid AND
+            tr7.resultid = 'PO' AND
+            tr7.resultvaluation = 'OK' AND
+            tr7.deletion = 'N'
         WHERE
             trq.batchnumber IS NOT NULL AND
             trq.product IS NOT NULL AND
