@@ -4,7 +4,7 @@ import re, pyperclip, os, json
 clipboard = pyperclip.paste()
 
 pattern_product = re.compile(r'(?<=\w{3})?(?P<product>[abdefghijkl]\d{3})(?=\w{4})?',re.IGNORECASE)
-pattern_batch = re.compile(r'[^(ct\#?)](?P<batch>\d{3}-\d{4}\b)',re.IGNORECASE)
+pattern_batch = re.compile(r'[^(ct\#?)](?P<batch>\b\d{3}-\d{4})')
 pattern_lot = re.compile(r'(?P<lot>\b\d{4}\w\d\w?|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d)',re.IGNORECASE)
 pattern_coated = re.compile(r'(?:\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d\s|coated:?\s?|ct\#?\s?)(?P<coated>\d{3}-\d{4})',re.IGNORECASE)
 
@@ -22,9 +22,6 @@ with open('/Users/matbook/Desktop/PyLMS/codes.json', 'r+') as f:
 		data['product'] = match_product.group('product').upper()
 		code += match_product.group('product').upper()
 		product = match_product.group('product').upper()
-	if match_batch:
-		data['batch'] = match_batch.group('batch')
-		code += ' ' + match_batch.group('batch')
 	if match_batch and not match_lot and not match_coated:
 		data['lot'] = None
 		data['coated'] = None
@@ -34,6 +31,9 @@ with open('/Users/matbook/Desktop/PyLMS/codes.json', 'r+') as f:
 	if match_coated:
 		data['coated'] = match_coated.group('coated')
 		code += ' ' + match_coated.group('coated')
+	if match_batch:
+		data['batch'] = match_batch.group('batch')
+		code += ' ' + match_batch.group('batch')
 
 with open('/Users/matbook/Desktop/PyLMS/codes.json', 'w') as nf:
 	nf.seek(0)

@@ -2,7 +2,7 @@
 
 let input = 'product'
 
-let shellScript = '/Users/matbook/.pyenv/versions/3.7.3/bin/python3.7 /Users/matbook/Desktop/PyLMS/read_codes.py' + ' ' + input
+    let shellScript = '/Users/matbook/.pyenv/versions/3.7.3/bin/python3.7 /Users/matbook/Desktop/PyLMS/BTT Scripts/read_codes.py' + ' ' + input
 
 let shellScriptWrapper = {
     script: shellScript, // mandatory

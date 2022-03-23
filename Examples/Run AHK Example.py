@@ -1,7 +1,14 @@
-from ahk import AHK
+import requests
 
-ahk = AHK()
+headers = {
+  'Authorization': 'pk_12858786_CAXE9O3ZDDOV31WBVR0S9D59W9CJEG0S',
+  'Content-Type': 'application/json'
+}
+response = requests.get('https://private-anon-9bb174da19-clickup20.apiary-proxy.com/api/v2/team/8694610/time_entries/current?assignee=12858786', params=headers)
 
-ahk_script = 'Run C:\\Users\\mmignin\\Documents\\VQuest\\Vquest.ahk'
-ahk.run_script(ahk_script, blocking=False)
+# response_body = urlopen(request).read()
+print(response.json)
+
+
+
 

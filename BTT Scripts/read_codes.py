@@ -2,6 +2,8 @@
 import json, sys
 
 a_code = sys.argv[1]
+
+
 try:
 	clear_code = sys.argv[2]
 except:
