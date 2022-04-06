@@ -71,7 +71,7 @@ async function BTTNotification(note) {
 /* custom set brightness method using one of BTT's built-in dynamic variables */
 async function ChangeBrightness(value) {
   await callBTT('set_number_variable', {variable_name: 'BuiltInDisplayBrightness', to:value})
-
+}
 
 async function SayHelloWorld() {
   let shellScript = {script: 'say hello world'};
