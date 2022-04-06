@@ -15,7 +15,7 @@ match_coated = pattern_coated.search(clipboard)
 
 code=''
 data=[]
-with open('/Users/matbook/Desktop/PyLMS/codes.json', 'r+') as f:
+with open('/Users/matbook/PyLMS/codes.json', 'r+') as f:
 	data = json.load(f)
 	# if not product and not batch and not lot and not coated:
 	if match_product:
@@ -35,7 +35,7 @@ with open('/Users/matbook/Desktop/PyLMS/codes.json', 'r+') as f:
 		data['batch'] = match_batch.group('batch')
 		code += ' ' + match_batch.group('batch')
 
-with open('/Users/matbook/Desktop/PyLMS/codes.json', 'w') as nf:
+with open('/Users/matbook/PyLMS/codes.json', 'w') as nf:
 	nf.seek(0)
 	json.dump(data, nf, indent=4)
 
