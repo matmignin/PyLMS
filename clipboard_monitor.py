@@ -10,7 +10,7 @@ pattern_coated = re.compile(r'(?:\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCD
 
 
 def save_json(input):
-    with open('/Users/matbook/Desktop/PyLMS/codes.json', 'w') as nf:
+    with open('/Users/matbook/PyLMS/codes.json', 'w') as nf:
         nf.seek(0)
         json.dump(input, nf, indent=4)
 
@@ -27,7 +27,7 @@ while True:
         match_coated = pattern_coated.search(recent_value)
         code=''
         data=[]
-        with open('/Users/matbook/Desktop/PyLMS/codes.json', 'r+') as f:
+        with open('/Users/matbook/PyLMS/codes.json', 'r+') as f:
             data = json.load(f)
             if match_product:
                 data['product'] = match_product.group('product').upper()

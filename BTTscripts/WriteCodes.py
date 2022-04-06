@@ -2,21 +2,21 @@ import json
 
 
 
-def json_add_batch(new_batch,n=0, filename='/Volumes/SHARED/PyLMS/codes.json'):
+def json_add_batch(new_batch,n=0, filename='/Users/matbook/PyLMS/codes.json'):
 	with open(filename,'r+') as f:
 		data = json.load(f)
 		data['products'][n]['batches'].append({'batch':new_batch})
 		f.seek(0)
 		json.dump(data, f, indent=4)
 
-def json_add_product(new_product,filename='/Volumes/SHARED/PyLMS/codes.json'):
+def json_add_product(new_product,filename='/Users/matbook/PyLMS/codes.json'):
 	with open(filename,'r+') as f:
 		data = json.load(f)
 		data['products'].append({'product':new_product})
 		f.seek(0)
 		json.dump(data, f, indent=4)
 
-def json_add_lot(new_lot,x=0,y=0, filename='/Volumes/SHARED/PyLMS/codes.json'):
+def json_add_lot(new_lot,x=0,y=0, filename='/Users/matbook/PyLMS/codes.json'):
 	with open(filename,'r+') as f:
 		data = json.load(f)
 		data['products'][x]['batches'][y]['lot'].append(new_lot)
@@ -24,7 +24,7 @@ def json_add_lot(new_lot,x=0,y=0, filename='/Volumes/SHARED/PyLMS/codes.json'):
 		json.dump(data, f, indent=4)
 
 
-def json_add_code(new_product='',new_batch='',new_lot='',n=0,m=0, filename='/Volumes/SHARED/PyLMS/codes.json'):
+def json_add_code(new_product='',new_batch='',new_lot='',n=0,m=0, filename='/Users/matbook/PyLMS/codes.json'):
 	with open(filename,'r+') as f:
 		data = json.load(f)
 		if new_product:

@@ -3,7 +3,7 @@
 (async () => {
 
 // put the shell script into a string (single backticks are great for multiline strings)
-    let shellScript = '/Users/matbook/.pyenv/versions/3.7.3/bin/python3.7 /Volumes/SHARED/PyLMS/BTTscripts/read_product.py'
+    let shellScript = '/Users/matbook/.pyenv/versions/3.7.3/bin/python3.7 /Users/matbook/PyLMS/BTTscripts/read_product.py'
 
 let shellScriptWrapper = {
     script: shellScript, // mandatory
