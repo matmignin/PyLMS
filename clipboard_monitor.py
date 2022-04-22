@@ -2,7 +2,7 @@ import time, re, pyperclip, json, os, sys
 
 
 pattern_product = re.compile(r'(?<=\w{3})?(?P<product>[abdefghijkl]\d{3})(?=\w{4})?',re.IGNORECASE)
-pattern_batch = re.compile(r'[^(ct\#?)](?P<batch>\b\d{3}-\d{4})')
+pattern_batch = re.compile(r'(?<!([ct#|ct]).)\b(?P<batch>\d{3}-\d{4})',re.IGNORECASE)
 pattern_lot = re.compile(r'(?P<lot>\b\d{4}\w\d\w?|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d)',re.IGNORECASE)
 pattern_coated = re.compile(r'(?:\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d\s|coated:?\s?|ct\#?\s?)(?P<coated>\d{3}-\d{4})',re.IGNORECASE)
 
@@ -10,7 +10,7 @@ pattern_coated = re.compile(r'(?:\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCD
 
 
 def save_json(input):
-    with open('/Users/matbook/PyLMS/codes.json', 'w') as nf:
+    with open(os.path.expanduser('~/PyLMS/codes.json'), 'w') as nf:
         nf.seek(0)
         json.dump(input, nf, indent=4)
 
@@ -27,7 +27,7 @@ while True:
         match_coated = pattern_coated.search(recent_value)
         code=''
         data=[]
-        with open('/Users/matbook/PyLMS/codes.json', 'r+') as f:
+        with open(os.path.expanduser('~/PyLMS/codes.json'), 'r+') as f:
             data = json.load(f)
             if match_product:
                 data['product'] = match_product.group('product').upper()
@@ -49,3 +49,5 @@ while True:
           print(code)
           save_json(data)
     time.sleep(0.1)
+
+
