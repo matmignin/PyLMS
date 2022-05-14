@@ -1,7 +1,7 @@
 import time, re, pyperclip, json, os, sys
 
 
-pattern_product = re.compile(r'(?<=\w{3})?(?P<product>[abdefghijkl]\d{3})(?=\w{4})?',re.IGNORECASE)
+pattern_product = re.compile(r'(?P<product>[abdefghijkl]\b\d{3})(?=\w{4})?',re.IGNORECASE)
 pattern_batch = re.compile(r'(?<!([ct#|ct]).)\b(?P<batch>\d{3}-\d{4})',re.IGNORECASE)
 pattern_lot = re.compile(r'(?P<lot>\b\d{4}\w\d\w?|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d)',re.IGNORECASE)
 pattern_coated = re.compile(r'(?:\d{4}\w\d\w?.|\bBulk\b|G\d{7}\w?\b|VC\d{6}[ABCDEFGH]?|V[A-Z]\d{5}[A-Z]\d?|\d{5}\[A-Z]{3}\d\s|coated:?\s?|ct\#?\s?)(?P<coated>\d{3}-\d{4})',re.IGNORECASE)
@@ -20,7 +20,7 @@ while True:
     tmp_value = pyperclip.paste()
     if tmp_value != recent_value:
         recent_value = tmp_value
-        print("Value changed: %s" % str(recent_value)[:20])
+        # print("Value changed: %s" % str(recent_value)[:20])
         match_product = pattern_product.search(recent_value)
         match_batch = pattern_batch.search(recent_value)
         match_lot = pattern_lot.search(recent_value)
@@ -33,9 +33,11 @@ while True:
                 data['product'] = match_product.group('product').upper()
                 code += match_product.group('product').upper()
                 product = match_product.group('product').upper()
-            if match_batch and not match_lot and not match_coated:
+            if match_batch and not match_lot or not match_coated:
+                data['batch'] = match_batch.group('batch')
                 data['lot'] = None
                 data['coated'] = None
+                code += ' ' + match_batch.group('batch')
             if match_lot:
                 data['lot'] = match_lot.group('lot').upper()
                 code += ' ' + match_lot.group('lot').upper()
@@ -48,6 +50,8 @@ while True:
         if code:
           print(code)
           save_json(data)
-    time.sleep(0.1)
+    time.sleep(0.5)
+
+
 
 

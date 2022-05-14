@@ -23,8 +23,10 @@ with open(os.path.expanduser('~/PyLMS/codes.json'), 'r+') as f:
 		code += match_product.group('product').upper()
 		product = match_product.group('product').upper()
 	if match_batch and not match_lot and not match_coated:
+		data['batch'] = match_batch.group('batch')
 		data['lot'] = None
 		data['coated'] = None
+		code += ' ' + match_batch.group('batch')
 	if match_lot:
 		data['lot'] = match_lot.group('lot').upper()
 		code += ' ' + match_lot.group('lot').upper()
