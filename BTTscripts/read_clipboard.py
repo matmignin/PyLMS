@@ -6,11 +6,8 @@ try:
 	with open(os.path.expanduser('/Volumes/~mmignin/RemoteVQ/clipboard.txt'), 'r') as f:
 		cliptext = f.read()
 	print(cliptext)
-	# pyperclip.copy(cliptext)
 except:
 	print('')
-
-
 
 
 

@@ -1,4 +1,4 @@
-#!/Users/matbook/.pyenv/versions/3.8.3/envs/VQenv/bin/python
+#!/Users/matbook/.pyenv/versions/3.7.3/bin/python3.7
 import requests,json
 
 headers = {

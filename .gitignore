@@ -10,3 +10,5 @@ lib/events.txt
 .vscode/settings.json
 .DS_Store
 codes.json
+Notebooks/LabelCopy.ipynb
+tk-0.1.0/dist/tk-0.1.0-py3.8.egg
